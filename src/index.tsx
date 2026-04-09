@@ -3,6 +3,22 @@ import './index.css';
 import { render } from 'solid-js/web';
 import 'solid-devtools';
 
+import { loadMembers } from './storage';
+
+function seedInitialData() {
+  const members = loadMembers()
+  if (members.length === 0) {
+    const initialMembers = [
+      { id: 'demo_1', name: 'Anna Schmidt', contract: 1.0, isActive: true },
+      { id: 'demo_2', name: 'Ben Müller', contract: 1.0, isActive: true },
+      { id: 'demo_3', name: 'Clara Weber', contract: 0.5, isActive: true },
+    ]
+    localStorage.setItem('dienstplan_members', JSON.stringify(initialMembers))
+  }
+}
+
+seedInitialData()
+
 import App from './App';
 
 const root = document.getElementById('root');
