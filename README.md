@@ -1,36 +1,131 @@
-## Usage
+# Dienstplan
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+A team on-call duty (Rufdienst) scheduler that automatically generates fair monthly schedules based on work contracts while respecting vacation constraints.
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+## Features
 
-```bash
-$ npm install # or pnpm install or yarn install
+- 📊 **Fair distribution** proportional to contract percentage (50%, 100%, etc.)
+- 🏖️ **Vacation tracking** per team member
+- 📅 **Monthly calendar view** with assignment visualization
+- ⚠️ **Conflict and warning indicators** for uncovered days
+- 🔄 **Manual override** capability per day
+- 💾 **Browser localStorage** persistence (no backend required)
+
+## Problem
+
+Team members need to plan on-call duty on a monthly basis. Manual scheduling is:
+- Time-consuming
+- Prone to unfair distribution
+- Difficult to track with multiple vacation days
+- Error-prone with conflicting assignments
+
+## Solution
+
+A fairness-based algorithm that:
+1. Calculates each member's "capacity" based on contract % × available days
+2. Assigns days sequentially, prioritizing members furthest below their fair share
+3. Respects constraints (max 3 consecutive, max 1 weekday per week)
+4. Surface conflicts and soft constraint violations for manual resolution
+
+## Capabilities
+
+### Member Management
+- Add/edit/archive team members
+- Contract percentage (40%-100%)
+- Unique name validation
+
+### Vacation Tracking
+- Per-member vacation calendar
+- Click-to-toggle days
+- Note support for vacation reasons
+
+### Schedule Generation
+- Automatic monthly generation
+- Proportional to contract %
+- Hard constraints enforced (vacation, 3 consecutive max)
+- Soft constraints with warnings (1 weekday/week)
+- Weekend = Fri-Sun (3-day block)
+
+### Calendar View
+- Monthly grid layout
+- Navigate between months
+- Day details on click
+- Manual override per day
+
+### Conflict & Warning Display
+- Red alert for uncovered days
+- Amber alert for constraint violations
+- Summary lists with explanations
+
+## Algorithm
+
+```
+For each day in month:
+  1. Filter available members (not on vacation)
+  2. Exclude by hard constraints (3 consecutive)
+  3. Prefer members obeying soft constraints (weekday limit)
+  4. Pick member with lowest fairness deficit
+  5. Mark violations if soft constraint broken
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+**Constraint Priority:**
+1. Hard: Max 3 consecutive days
+2. Hard: Never assign vacation days
+3. Soft: Max 1 weekday (Mon-Thu) per calendar week
+4. Fairness: Balance by contract %
 
-## Available Scripts
+**Weekend Definition:** Friday counts as weekend (Fri-Sun = 3-day on-call block matching real-world "Freitag nachmittags bis Montag morgens")
 
-In the project directory, you can run:
+## Getting Started
 
-### `npm run dev` or `npm start`
+### Prerequisites
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js 18+
+- npm, pnpm, or yarn
 
-The page will reload if you make edits.<br>
+### Installation
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+### Development
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```bash
+npm run dev
+```
+
+Open [http://localhost:5437](http://localhost:5437) to view it in the browser.
+
+### Production Build
+
+```bash
+npm run build
+```
+
+Builds to the `dist` folder.
+
+### Preview Production Build
+
+```bash
+npm run serve
+```
+
+## Tech Stack
+
+- **SolidJS** - Reactive UI framework
+- **Vite** - Build tool
+- **Tailwind CSS 4** - Styling
+- **localStorage** - Browser persistence
+
+## Localization
+
+German (de-DE) - optimized for German workplace scheduling.
 
 ## Deployment
 
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+Deploy the `dist` folder to any static host (Netlify, Vercel, GitHub Pages, etc.)
 
-## This project was created with the [Solid CLI](https://github.com/solidjs-community/solid-cli)
+## License
+
+MIT
