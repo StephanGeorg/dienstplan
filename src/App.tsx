@@ -1,13 +1,17 @@
-import { Router, Route } from '@solidjs/router';
-import StaffList from './components/StaffList';
-import type { Component } from 'solid-js';
+import { Router, Route } from '@solidjs/router'
+import type { Component } from 'solid-js'
+import CalendarView from './components/CalendarView'
+import MemberManagement from './components/MemberManagement'
 
 const App: Component = () => {
   return (
-    <Router>
-      <Route path="/" component={StaffList} />
-    </Router>
-  );
-};
+    <div class="min-h-screen bg-gray-50">
+      <Router>
+        <Route path="/" component={CalendarView} />
+        <Route path="/members" component={MemberManagement} />
+      </Router>
+    </div>
+  )
+}
 
-export default App;
+export default App
