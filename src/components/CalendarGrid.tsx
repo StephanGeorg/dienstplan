@@ -1,7 +1,5 @@
-import { createSignal, Show, For } from 'solid-js'
-import type { Schedule, ScheduleDay } from '../types'
-import { getDayName, isWeekend } from '../lib/date-utils'
-import { getMemberById } from '../stores/members'
+import { For } from 'solid-js'
+import type { Schedule } from '../types'
 import CalendarCell from './CalendarCell'
 
 interface Props {

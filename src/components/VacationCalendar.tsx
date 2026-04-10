@@ -1,6 +1,5 @@
-import { For, Show } from 'solid-js'
 import { currentMonth } from '../stores/schedules'
-import { getVacationsForMemberInMonth, toggleVacation, getVacation } from '../stores/vacations'
+import { toggleVacation, getVacation } from '../stores/vacations'
 import { getDaysInMonth, parseMonth } from '../lib/date-utils'
 import type { Member } from '../types'
 
@@ -12,7 +11,6 @@ interface Props {
 export default function VacationCalendar(props: Props) {
   const { year, monthNumber } = parseMonth(currentMonth())
   const daysInMonth = getDaysInMonth(year, monthNumber)
-  const month = currentMonth()
 
   const isVacation = (day: number) => {
     const date = `${year}-${String(monthNumber).padStart(2, '0')}-${String(day).padStart(2, '0')}`

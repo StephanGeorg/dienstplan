@@ -3,7 +3,7 @@ import './index.css';
 import { render } from 'solid-js/web';
 import 'solid-devtools';
 
-import { loadMembers } from './storage';
+import { loadMembers, saveMembers } from './storage';
 
 function seedInitialData() {
   const members = loadMembers()
@@ -13,7 +13,7 @@ function seedInitialData() {
       { id: 'demo_2', name: 'Ben Müller', contract: 1.0, isActive: true },
       { id: 'demo_3', name: 'Clara Weber', contract: 0.5, isActive: true },
     ]
-    localStorage.setItem('dienstplan_members', JSON.stringify(initialMembers))
+    saveMembers(initialMembers)
   }
 }
 

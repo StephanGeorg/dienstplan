@@ -1,4 +1,4 @@
-import type { Member, ScheduleDay } from '../types'
+import type { Member, ScheduleDay, ViolationType } from '../types'
 import { isOnVacation } from '../stores/vacations'
 import { formatDate, parseMonth, isWeekday, getCalendarWeek } from './date-utils'
 
@@ -73,7 +73,7 @@ export function calculateFairnessDeficit(
 export interface AssignmentResult {
   memberId: string | null
   status: 'ASSIGNED' | 'CONFLICT'
-  violations: string[]
+  violations: ViolationType[]
 }
 
 export function selectMemberForDay(
@@ -126,7 +126,7 @@ export function selectMemberForDay(
   })
 
   const selected = sorted[0]
-  const violations: string[] = []
+  const violations: ViolationType[] = []
 
   if (wouldExceedWeekdayLimit(selected.id, day, month, currentDays)) {
     violations.push('WEEKDAY_LIMIT_EXCEEDED')

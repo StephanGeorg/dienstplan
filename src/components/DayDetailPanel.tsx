@@ -2,7 +2,7 @@ import { For, Show } from 'solid-js'
 import type { ScheduleDay } from '../types'
 import { getMemberById, getActiveMembers } from '../stores/members'
 import { applyManualOverride } from '../stores/schedules'
-import { getDayName, formatDate, parseMonth } from '../lib/date-utils'
+import { getDayName } from '../lib/date-utils'
 
 interface Props {
   day: ScheduleDay
@@ -11,9 +11,6 @@ interface Props {
 }
 
 export default function DayDetailPanel(props: Props) {
-  const { year, monthNumber } = parseMonth(props.month)
-  const date = () => formatDate(year, monthNumber, props.day.day)
-  
   const assignedMember = () => 
     props.day.memberId ? getMemberById(props.day.memberId) : null
 

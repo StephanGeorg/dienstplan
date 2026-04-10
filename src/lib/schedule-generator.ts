@@ -17,7 +17,7 @@ export function generateSchedule(month: string): Schedule {
       day,
       memberId: result.memberId,
       status: result.status,
-      violations: result.violations as ScheduleDay['violations'],
+      violations: result.violations,
     })
   }
 

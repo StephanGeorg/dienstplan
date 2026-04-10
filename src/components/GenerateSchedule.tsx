@@ -1,5 +1,4 @@
-import { currentMonth, setCurrentMonth, hasSchedule, saveSchedule, deleteSchedule } from '../stores/schedules'
-import { getMonthName, getPreviousMonth, getNextMonth } from '../lib/date-utils'
+import { currentMonth, hasSchedule, saveSchedule } from '../stores/schedules'
 import { generateSchedule } from '../lib/schedule-generator'
 import { getActiveMembers } from '../stores/members'
 

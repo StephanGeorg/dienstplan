@@ -1,6 +1,5 @@
-import { For, Show } from 'solid-js'
+import { Show } from 'solid-js'
 import { currentSchedule } from '../stores/schedules'
-import { getMonthName } from '../lib/date-utils'
 import CalendarGrid from './CalendarGrid'
 import GenerateSchedule from './GenerateSchedule'
 import ConflictSummary from './ConflictSummary'
